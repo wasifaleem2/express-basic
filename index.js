@@ -5,7 +5,7 @@ let port = 5001
 console.log("result", 2+2)
 
 app.get('/', (req, res,next)=>{
-    res.json({hi: `hello world`})
+    res.json({msg: `hello world`, project: "express"})
 })
 
 app.listen(port, ()=>{
