@@ -19,7 +19,11 @@ pipeline {
         stage('Start Server') {
             steps {
                 script {
-                    sh 'npm start'
+                    if (isUnix()) {
+                        sh 'npm start &'
+                    } else {
+                        bat 'start npm start'
+                    }
                 }
             }
         }
