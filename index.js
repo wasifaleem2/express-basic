@@ -4,8 +4,11 @@ const app = express();
 let port = 5001
 console.log("result", 2+2)
 
+// app.get('/', (req, res,next)=>{
+//     res.json({msg: `hello world`, project: "express"})
+// })
 app.get('/', (req, res,next)=>{
-    res.json({msg: `hello world`, project: "express"})
+    res.sendFile("./index.html")
 })
 
 app.listen(port, ()=>{
