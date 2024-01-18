@@ -23,7 +23,7 @@ pipeline {
         stage('Start Server') {
             steps {
                 script {
-                    bat 'npm start'
+                    bat 'npm start &'
                 }
             }
         }
