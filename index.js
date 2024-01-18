@@ -9,7 +9,7 @@ console.log("result", 2+2)
 //     res.json({msg: `hello world`, project: "express"})
 // })
 app.get('/', (req, res,next)=>{
-    res.sendFile(path.join(__dirname,"public","index.html"))
+    res.sendFile(path.join(__dirname,"index.html"))
 })
 
 app.listen(port, ()=>{
