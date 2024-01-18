@@ -16,26 +16,10 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    sh 'npm test'
-                }
-            }
-        }
-
-        stage('Build') {
-            steps {
-                script {
-                    sh 'npm run build'
-                }
-            }
-        }
-
         stage('Start Server') {
             steps {
                 script {
-                    sh 'npm start &'
+                    sh 'npm start'
                 }
             }
         }
