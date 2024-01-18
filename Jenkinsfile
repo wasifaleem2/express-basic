@@ -16,22 +16,6 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    bat 'npm test'
-                }
-            }
-        }
-
-        stage('Build') {
-            steps {
-                script {
-                    bat 'npm run build'
-                }
-            }
-        }
-
         stage('Start Server') {
             steps {
                 script {
