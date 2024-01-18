@@ -11,7 +11,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    sh 'npm install'
+                    bat 'npm install'
                 }
             }
         }
@@ -19,7 +19,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    sh 'npm test'
+                    bat 'npm test'
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'npm run build'
+                    bat 'npm run build'
                 }
             }
         }
@@ -35,11 +35,7 @@ pipeline {
         stage('Start Server') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh 'npm start &'
-                    } else {
-                        bat 'start npm start'
-                    }
+                    bat 'start npm start'
                 }
             }
         }
