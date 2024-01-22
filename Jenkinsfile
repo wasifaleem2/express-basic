@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     // Install Docker Compose
-                    sh 'apt-get update -y && apt-get install -y docker-compose && rm -rf /var/lib/apt/lists/* -y'
+                    sh 'apt-get update -y && apt-get install -y docker-compose && rm -rf /var/lib/apt/lists/*'
                 }
             }
         }
