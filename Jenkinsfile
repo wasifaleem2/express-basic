@@ -8,16 +8,16 @@ pipeline {
             }
         }
 
-        stage('Build and Test') {
-            steps {
-                script {
-                    // install inside Node.js container
-                    // docker.image('node:14').inside {
-                    sh 'npm install'
-                    // }
-                }
-            }
-        }
+        // stage('Build and Test') {
+        //     steps {
+        //         script {
+        //             // install inside Node.js container
+        //             // docker.image('node:14').inside {
+        //             sh 'npm install'
+        //             // }
+        //         }
+        //     }
+        // }
 
         stage('Build Docker Image') {
             steps {
