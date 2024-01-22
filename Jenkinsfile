@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image inside Node.js container
-                    sh 'docker-compose -f docker-compose.yaml build my-node-app-jenkins'
+                    sh 'docker-compose -f docker-compose.yaml build node-app-jenkins'
                 }
             }
         }
@@ -32,8 +32,8 @@ pipeline {
             steps {
                 script {
                     // Use docker-compose to manage deployment
-                    sh 'docker-compose -f docker-compose.yaml stop my-node-app-jenkins || true'
-                    sh 'docker-compose -f docker-compose.yaml rm -f my-node-app-jenkins || true'
+                    sh 'docker-compose -f docker-compose.yaml stop node-app-jenkins || true'
+                    sh 'docker-compose -f docker-compose.yaml stop node-app-jenkins || true'
                     // run the new container
                     sh 'docker-compose -f docker-compose.yaml up -d'
                 }
