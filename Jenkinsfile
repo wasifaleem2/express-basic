@@ -19,6 +19,15 @@ pipeline {
         //     }
         // }
 
+        stage('Install Docker Compose') {
+            steps {
+                script {
+                    // Install Docker Compose
+                    sh 'apt-get update && apt-get install -y docker-compose'
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -33,7 +42,7 @@ pipeline {
                 script {
                     // Use docker-compose to manage deployment
                     sh 'docker-compose -f docker-compose.yaml stop node-app-jenkins || true'
-                    sh 'docker-compose -f docker-compose.yaml stop node-app-jenkins || true'
+                    sh 'docker-compose -f docker-compose.yaml stop node-app-jenkins -y || true'
                     // run the new container
                     sh 'docker-compose -f docker-compose.yaml up -d'
                 }
