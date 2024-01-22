@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    triggers {
-        cron('*/2 * * * *')
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -12,18 +8,34 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Build and Test') {
             steps {
                 script {
-                    bat 'npm install'
+                    // install inside Node.js container
+                    docker.image('node:14').inside {
+                        sh 'npm install'
+                    }
                 }
             }
         }
 
-        stage('Start Server') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    bat 'npm start &'
+                    // Build Docker image inside Node.js container
+                    sh 'docker-compose -f docker-compose.yml build my-node-app-jenkins'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Use docker-compose to manage deployment
+                    sh 'docker-compose -f docker-compose.yml stop my-node-app-jenkins || true'
+                    sh 'docker-compose -f docker-compose.yml rm -f my-node-app-jenkins || true'
+                    // run the new container
+                    sh 'docker-compose -f docker-compose.yml up -d'
                 }
             }
         }

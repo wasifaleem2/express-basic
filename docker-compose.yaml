@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins-master
+    ports:
+      - "8080:8080"
+    networks:
+      - jenkins-net 
+    volumes:
+      - jenkins-data:/var/jenkins_home
+  
+  node-app-jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my-node-app-jenkins
+    ports:
+      - "9001:8080"
+    networks:
+      - jenkins-net
+
+networks:
+  jenkins-net:
+    driver: bridge
+
+volumes:
+  jenkins-data:
