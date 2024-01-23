@@ -22,9 +22,17 @@ pipeline {
         stage('Install Docker Compose') {
             steps {
                 script {
+                    def installDir = "/var/jenkins_home/.local/bin"
+
+                    // Create the directory if it doesn't exist
+                    sh "mkdir -p ${installDir}"
+
                     // Install Docker Compose
-                    sh 'curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
-                    sh 'chmod +x /usr/local/bin/docker-compose'
+                    sh "curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o ${installDir}/docker-compose"
+                    sh "chmod +x ${installDir}/docker-compose"
+
+                    // Add the directory to the PATH
+                    sh 'echo "PATH=$PATH:' + installDir + '" >> /var/jenkins_home/.bashrc'
                 }
             }
         }
