@@ -23,10 +23,12 @@ pipeline {
             steps {
                 script {
                     // Install Docker Compose
-                    sh 'apt-get update -y && apt-get install -y docker-compose && rm -rf /var/lib/apt/lists/*'
+                    sh 'curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
+                    sh 'chmod +x /usr/local/bin/docker-compose'
                 }
             }
         }
+
 
         stage('Build Docker Image') {
             steps {
