@@ -6,6 +6,7 @@ services:
     container_name: jenkins-master
     ports:
       - "8080:8080"
+      - "50000:50000"
     networks:
       - jenkins-net 
     volumes:
@@ -17,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: my-node-app-jenkins
     ports:
-      - "9001:8080"
+      - "9001:3000"
     networks:
       - jenkins-net
 
