@@ -1,6 +1,6 @@
 version: '3'
 services:
-  node-app:
+  new-node-app:
     build:
       context: .
       dockerfile: Dockerfile

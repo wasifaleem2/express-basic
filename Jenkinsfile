@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'docker ps'
+                    sh 'npm install'
                 }
             }
         }
@@ -20,16 +20,12 @@ pipeline {
         //     }
         // }
 
-        // stage('Deploy') {
-        //     steps {
-        //         script {
-        //             // Push Docker image to registry (if applicable)
-        //             // No need to push if using local Docker daemon
-
-        //             // Deploy Docker container
-        //             sh 'docker-compose up -d'
-        //         }
-        //     }
-        // }
+        stage('Deploy') {
+            steps {
+                script {
+                    sh 'npm start'
+                }
+            }
+        }
     }
 }
