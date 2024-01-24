@@ -1,28 +1,33 @@
 pipeline {
     agent any
-    
-    stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the source code from Git
-                checkout scm
-            }
-        }
 
-        stage('Build Docker Image') {
+    stages {
+        stage('Build') {
             steps {
                 script {
                     // Build Docker image
-                    docker.build('your-node-app:latest')
+                    docker.build("node-app:latest")
                 }
             }
         }
 
-        stage('Run Docker Container') {
+        stage('Test') {
             steps {
                 script {
-                    // Run Docker container
-                    docker.run('your-node-app:latest')
+                    // You can include testing steps here if needed
+                    // For example: npm test
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Push Docker image to registry (if applicable)
+                    // No need to push if using local Docker daemon
+
+                    // Deploy Docker container
+                    sh 'docker-compose up -d'
                 }
             }
         }
