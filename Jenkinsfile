@@ -2,28 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                script {
-                    // Build Docker image
-                    sh 'npm install'
-                }
+                checkout scm
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         script {
-        //             // You can include testing steps here if needed
-        //             // For example: npm test
-        //         }
-        //     }
-        // }
-
-        stage('Deploy') {
+        stage('Build and Run Docker Container') {
             steps {
                 script {
-                    sh 'npm start'
+                    def imageName = "wasifaleem/forjenkins-new-node-app:1"
+                    docker.build(imageName)
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                        docker.image(imageName).push()
+                    }
+                    sh 'docker run -p 8081:8081 -d wasifaleem/forjenkins-new-node-app:1'
                 }
             }
         }
