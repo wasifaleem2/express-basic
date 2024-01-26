@@ -24,7 +24,7 @@ pipeline {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                         docker.image(imageName).push()
                     }
-                    docker.image(imageName).run('-p 8081:8081 -S -d')
+                    docker.image(imageName).run('-p 8081:8081 -d')
                 }
             }
         }
