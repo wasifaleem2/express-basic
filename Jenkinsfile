@@ -24,7 +24,7 @@ pipeline {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                         docker.image(imageName).push()
                     }
-                    sh 'sudo docker run -p 8081:8081 -d wasifaleem/forjenkins-new-node-app'
+                    sh 'sudo docker run -p 8081:8081 -S -d wasifaleem/forjenkins-new-node-app'
                 }
             }
         }
