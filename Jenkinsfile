@@ -8,13 +8,13 @@ pipeline {
             }
         }
 
-        stage('switch to root') {
-            steps {
-                script {
-                    sh 'sudo su -'
-                }
-            }
-        }
+        // stage('switch to root') {
+        //     steps {
+        //         script {
+        //             sh 'sudo su -'
+        //         }
+        //     }
+        // }
 
         stage('Build and Run Docker Container') {
             steps {
