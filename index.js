@@ -6,7 +6,7 @@ let port = 8081
 console.log("result", 2+2)
 
 app.get('/', (req, res,next)=>{
-    res.json({msg: `hello world`, project: "express"})
+    res.json({msg: `hello `, project: "express"})
 })
 // app.get('/', (req, res,next)=>{
 //     res.sendFile(path.join(__dirname,"index.html"))
