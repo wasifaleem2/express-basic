@@ -8,14 +8,6 @@ pipeline {
             }
         }
 
-        // stage('switch to root') {
-        //     steps {
-        //         script {
-        //             sh 'sudo su -'
-        //         }
-        //     }
-        // }
-
         stage('Build and Run Docker Container') {
             steps {
                 script {
@@ -25,6 +17,8 @@ pipeline {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                         docker.image(imageName).push()
                     }
+                    sh "docker stop ${containerName} || true"
+                    sh "docker rm ${containerName} || true"
                     docker.image(imageName).run("--name ${containerName} -p 8081:8081 -d")
                 }
             }
